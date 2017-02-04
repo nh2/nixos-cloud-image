@@ -43,12 +43,19 @@ let cfg = config.services.cloud-init-custom;
         system_info:
           distro: nixos
           default_user:
-            name: nixos
+            name: root
 
         users:
           - default
+          - name: setup
+            plain_text_passwd: 'setup'
+            lock_passwd: False
+            sudo: ALL=(ALL) NOPASSWD:ALL
 
-        disable_root: true
+        disable_root: false
+        password: root
+        chpasswd:
+          expire: false
         preserve_hostname: false
 
         growpart:
